@@ -69,7 +69,20 @@ export async function getUserByCreds(req: Request, res: Response) {
     console.log(error);
     res.status(500).json({ message: "Error al obtener el usuario" });
   }
+}
 
+export async function updateUser(req: Request, res: Response) {
+  try {
+    
+    const { _id, ...updates} = req.body;
+
+    const user = await User.findOneAndUpdate({ _id: _id, active: true }, updates, { new: true, runValidators: true});
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error al actualizar el usuario" });
+  }
 }
 
 //Borrar usuarios

@@ -1,6 +1,12 @@
 import express from "express";
 import { authenticateToken } from "../auth/auth_token";
-import { createUser, deleteUser, getUserByCreds, getUserById, updateUser } from "./usuario.controller";
+import {
+  createUser,
+  deleteUser,
+  getUserByCreds,
+  getUserById,
+  updateUser,
+} from "./usuario.controller";
 
 const router = express.Router();
 
@@ -15,6 +21,9 @@ router.get("/ById/:_id", getUserById);
 
 //Ruta para obtener un usuario según el ID
 router.get("/ByCreds/", getUserByCreds);
+
+//Ruta para actualizar un usuario
+router.patch("/:_id", updateUser);
 
 //Ruta para inhabilitar al usuario según el ID (necesita token)
 router.delete("/:_id", deleteUser);

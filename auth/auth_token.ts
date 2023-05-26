@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 import { Request, Response } from "express";
 
+
+
 export async function authenticateToken(req: Request, res: Response, next: Function) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -16,3 +18,8 @@ export async function authenticateToken(req: Request, res: Response, next: Funct
       next();
     });
   }
+
+export async function generateToken(_id: string){
+    return jwt.sign({_id},process.env.JWTSecret,{ expiresIn: '10800s' });
+
+}
